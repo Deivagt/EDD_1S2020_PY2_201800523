@@ -12,6 +12,7 @@ package estructuras;
 public class arbolAvl {
 
     public nodoArbolAvl raiz;
+    public nodoArbolAvl temp;
     boolean control = false;
     int peso(nodoArbolAvl nodo) {
 	if (nodo == null) {
@@ -111,6 +112,23 @@ public class arbolAvl {
 	    preOrden(nodo.izquierda);
 	    preOrden(nodo.derecha);
 	}
+    }
+    
+    public nodoArbolAvl buscar(String categoria){
+	temp = null;
+	bsq(raiz, categoria);
+	return temp;
+    }
+      public void bsq(nodoArbolAvl nodo, String categoria) {
+	if (nodo != null) {
+	  if(nodo.categoria == categoria){
+	      temp = nodo;
+	  }
+	    bsq(nodo.izquierda,categoria);
+	    bsq(nodo.derecha, categoria);
+	    
+	}
+	
     }
 
     public boolean verificarBorrar(nodoArbolAvl nodo, String categoria, int carnet){

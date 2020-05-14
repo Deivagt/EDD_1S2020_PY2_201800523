@@ -11,32 +11,70 @@ package estructuras;
  */
 public class nodoArbolB {
 
-    libro[] libros;
+    public libro[] libros;
     int minimo;
     nodoArbolB[] hijos;
     int cantidad;
     boolean esHoja;
 
+    int contador;
+
     public nodoArbolB(int minimo, boolean esHoja) {
 	this.minimo = minimo;
 	this.esHoja = esHoja;
-	this.libros = new libro[2 * minimo - 1];
+	this.libros = new libro[2 * minimo-1];
 	this.hijos = new nodoArbolB[2 * minimo];
 	this.cantidad = 0;
+
     }
 
     public void atravesar() {
 	int i;
 	for (i = 0; i < this.cantidad; i++) {
-	    if (esHoja == false) {
-		hijos[i].atravesar();
-	    }
-	    System.out.println(i + " " + libros[i].isbn + " " + libros[i].autor + " ");
+
+	    System.out.println(i + " " + libros[i].isbn + " " + libros[i].autor + " " + cantidad);
 	}
 	System.out.println("	fin nodo");
-	if (esHoja == false) {
-	    hijos[i].atravesar();
+	for (int j = 0; j < this.cantidad + 1; j++) {
+	    if (hijos[j] != null) {
+		hijos[j].atravesar();
+	    }
+
 	}
+
+    }
+
+    public String imprimir(String sal, int contador) {
+	String salida = sal;
+
+	int i;
+	salida += "nodo" + contador + "[label = \"<f0> ";
+	for (i = 0; i < this.cantidad; i++) {
+
+	    salida += "|" + libros[i].isbn + "| <f" + (i + 1) + ">";
+	}
+	salida += "\"];\n";
+
+	int contTemp = 0;
+	contTemp = contador;
+
+	contador++;
+	for (int j = 0; j < this.cantidad + 1; j++) {
+	    if (hijos[j] != null) {
+		String b = "";
+		b += hijos[j].imprimir(b, contador);
+		salida += b;
+
+		salida += "\"nodo" + contTemp + "\" : f" + j + "-> \"nodo" + contador + "\"\n";
+
+		contador++;
+
+	    }
+
+	}
+
+	return salida;
+	//contador = 0;
     }
 
     public int obtenerId(int isbn) {
@@ -44,7 +82,7 @@ public class nodoArbolB {
 	while (id < cantidad && libros[id].isbn < isbn) {
 	    id++;
 	}
-	System.out.println("#####"+id);
+	System.out.println("#####" + id);
 	return id;
     }
 
@@ -86,6 +124,7 @@ public class nodoArbolB {
 	}
 
 	temp.cantidad = minimo - 1;
+
 	for (int j = cantidad; j >= i + 1; j--) {
 	    hijos[j + 1] = hijos[j];
 	}
@@ -173,6 +212,7 @@ public class nodoArbolB {
 	    libro previo = obtenerPrevio(id);
 	    libros[id] = previo;
 	    hijos[id].borrar(previo.isbn);
+
 	} else if (hijos[id + 1].cantidad >= minimo) {
 	    libro siguiente = obtenerSiguiente(id);
 	    libros[id] = siguiente;
@@ -185,7 +225,7 @@ public class nodoArbolB {
 
     libro obtenerPrevio(int id) {
 	nodoArbolB temp = hijos[id];
-	while (!(temp.esHoja == true)) {
+	while (!temp.esHoja) {
 	    temp = temp.hijos[temp.cantidad];
 	}
 
@@ -194,7 +234,7 @@ public class nodoArbolB {
 
     libro obtenerSiguiente(int id) {
 	nodoArbolB temp = hijos[id];
-	while (!(temp.esHoja == true)) {
+	while (!temp.esHoja) {
 	    temp = temp.hijos[0];
 	}
 	return temp.libros[0];
@@ -222,7 +262,7 @@ public class nodoArbolB {
 	    hijo.libros[i + 1] = hijo.libros[i];
 	}
 
-	if (hijo.esHoja == false) {
+	if (!hijo.esHoja) {
 	    for (int i = hijo.cantidad; i >= 0; --i) {
 		hijo.hijos[i + 1] = hijo.hijos[i];
 	    }
@@ -230,7 +270,7 @@ public class nodoArbolB {
 
 	hijo.libros[0] = libros[id - 1];
 
-	if (hijo.esHoja == false) {
+	if (!hijo.esHoja) {
 	    hijo.hijos[0] = hermano.hijos[hermano.cantidad];
 
 	}
@@ -248,7 +288,7 @@ public class nodoArbolB {
 
 	hijo.libros[hijo.cantidad] = libros[id];
 
-	if (hijo.esHoja == false) {
+	if (!hijo.esHoja) {
 	    hijo.hijos[hijo.cantidad + 1] = hermano.hijos[0];
 	}
 
@@ -258,7 +298,7 @@ public class nodoArbolB {
 	    hermano.libros[i - 1] = hermano.libros[i];
 	}
 
-	if (hermano.esHoja == false) {
+	if (!hermano.esHoja) {
 	    for (int i = 1; i <= hermano.cantidad; ++i) {
 		hermano.hijos[i - 1] = hermano.hijos[i];
 	    }
@@ -278,23 +318,23 @@ public class nodoArbolB {
 	    hijo.libros[i + minimo] = hermano.libros[i];
 	}
 
-	if (hijo.esHoja == false) {
-	    for (int i = 0; i < hermano.cantidad; ++i) {
+	if (!hijo.esHoja) {
+	    for (int i = 0; i <= hermano.cantidad; ++i) {
 		hijo.hijos[i + minimo] = hermano.hijos[i];
 	    }
 	}
-	
-	   for(int i = id +1;i <cantidad;++i){
-	       libros[i-1]=libros[i];
-	   }
-	   
-	   for(int i = id + 2; i <= cantidad;++i){
-	       hijos[i-1]=hijos[i];
-	   }
-	   
-	   hijo.cantidad += hermano.cantidad +1;
-	   cantidad--;
-	   
+
+	for (int i = id + 1; i < cantidad; ++i) {
+	    libros[i - 1] = libros[i];
+	}
+
+	for (int i = id + 2; i <= cantidad; ++i) {
+	    hijos[i - 1] = hijos[i];
+	}
+
+	hijo.cantidad += hermano.cantidad + 1;
+	cantidad--;
+
     }
 
 }
