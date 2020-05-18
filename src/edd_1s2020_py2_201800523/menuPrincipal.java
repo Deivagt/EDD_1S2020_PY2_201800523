@@ -12,6 +12,7 @@ package edd_1s2020_py2_201800523;
 public class menuPrincipal extends javax.swing.JFrame {
 
     misDatos datos = new misDatos();
+    Reportes reportes = new Reportes();
 
     /**
      * Creates new form menuPrincipal
@@ -46,6 +47,11 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton2.setText("Reportes");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Cerrar Sesion");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -141,6 +147,15 @@ public class menuPrincipal extends javax.swing.JFrame {
 	}
 	datos.setVisible(true);
     }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+	dispose();
+	if (reportes != null) {
+	    reportes.dispose();
+	    reportes = new Reportes();
+	}
+	reportes.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

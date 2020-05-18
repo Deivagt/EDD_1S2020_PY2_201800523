@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
 
     testButtons ti = new testButtons();
+    nuevoUsuario novo = new nuevoUsuario();
 
     /**
      * Creates new form Login
@@ -156,9 +157,7 @@ public class Login extends javax.swing.JFrame {
 	if (temp != null) {
 	    String passEntrada = Global.Globales.hashear(contra.getText());
 	    if (passEntrada.equals(temp.getContenido().getPass())) {
-		//System.out.println(temp.getContenido().getPass());
-		//System.out.println("1." + passEntrada);
-
+	
 		Global.Globales.usuarioActivo = temp;
 		
 		dispose();
@@ -187,7 +186,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-	// TODO add your handling code here:
+	if (novo != null) {
+	    novo.dispose();
+	}
+	novo.setVisible(true);
+	novo.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

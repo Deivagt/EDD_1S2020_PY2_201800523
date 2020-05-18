@@ -13,6 +13,7 @@ public class nodoArbolAvl {
     
    public String categoria;
    public arbolB librosCategoria;
+   public int cantidad;
    public int carnetAutor;
     int peso;
     int id;
@@ -20,9 +21,14 @@ public class nodoArbolAvl {
     nodoArbolAvl derecha;
     
     public nodoArbolAvl(String categoria, int carnetAutor){
+	cantidad = 0;
 	this.categoria = categoria;
 	this.carnetAutor = carnetAutor;
 	this.librosCategoria = new arbolB(3);
+	peso = 1;
+    }
+    public int getCantidad(){
+	return cantidad;
     }
     
 }

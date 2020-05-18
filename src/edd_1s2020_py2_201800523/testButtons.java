@@ -199,15 +199,22 @@ public class testButtons extends javax.swing.JFrame {
 		nuevolibro.setCategoria(categoria);
 
 		nodoArbolAvl nodo = Global.Globales.arbolCategorias.buscar(categoria);
+		System.out.println(nodo);
 		if (nodo != null) {// categoria existe
 		    nodo.librosCategoria.insertar(nuevolibro);
+		     nodo.cantidad++;
+		   
 		} else {
 		    Global.Globales.arbolCategorias.raiz = Global.Globales.arbolCategorias.insertar(Global.Globales.arbolCategorias.raiz, categoria,
 			    0);
+		    nodoArbolAvl nodoNew = Global.Globales.arbolCategorias.buscar(categoria);
+		    nodoNew.librosCategoria.insertar(nuevolibro);
+		     nodoNew.cantidad++;
+		   
 		}
-
+		
 	    }
-	    Global.Globales.arbolCategorias.preOrden(Global.Globales.arbolCategorias.raiz);
+	//    Global.Globales.arbolCategorias.preOrden(Global.Globales.arbolCategorias.raiz);
 
 	} catch (org.json.simple.parser.ParseException e) {
 
@@ -217,7 +224,12 @@ public class testButtons extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-	Global.Globales.arbolCategorias.graficar();
+	    Reportes reportes = new Reportes();
+	if (reportes != null) {
+	    reportes.dispose();
+	    reportes = new Reportes();
+	}
+	reportes.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

@@ -16,7 +16,7 @@ public class listaSimpleHash {
 
     public listaSimpleHash() {
 	this.primero = new nodoLS();
-	this.ultimo= new nodoLS();
+	this.ultimo = new nodoLS();
 
 	this.primero.setSiguiente(ultimo);
 	this.primero.setContenido(new usuario());
@@ -51,7 +51,7 @@ public class listaSimpleHash {
 	nodoLS temp = primero;
 
 	while (temp != ultimo) {
-	
+
 	    if (temp.getSiguiente().getContenido().getCarnet() == carnet) {
 		break;
 	    }
@@ -89,6 +89,36 @@ public class listaSimpleHash {
 	    System.out.println(temp.getContenido().getCarnet() + temp.getContenido().getNombre() + temp.getContenido().getApellido() + temp.getContenido().getCarrera() + temp.getContenido().getPass());
 	    temp = temp.getSiguiente();
 	}
+    }
+
+    public String graficar(int i) {
+	nodoLS temp = primero.getSiguiente();
+	String nodos = "";
+	int contador = 0;
+
+	while (temp != ultimo) {
+	    nodos = nodos + "Casilla" + i + "nodo" + contador + "[label = \"" + temp.getContenido().getNombre() + " " + temp.getContenido().getCarnet() + "\"];\n";
+	    if (temp.siguiente != ultimo) {
+		nodos = nodos + "Casilla" + i + "nodo" + contador + "->Casilla" + i + "nodo" + (contador + 1) + "\n";
+	    }
+	    contador++;
+	    temp = temp.getSiguiente();
+	}
+	return nodos;
+    }
+
+    public String rankeo(int i) {
+	nodoLS temp = primero.getSiguiente();
+	String rankeo = "";
+	int contador = 0;
+
+	while (temp != ultimo) {
+	    rankeo = rankeo + "Casilla" + i + "nodo" + contador + ";\n";
+	    contador++;
+	    temp = temp.getSiguiente();
+
+	}
+	return rankeo;
     }
 
 }
