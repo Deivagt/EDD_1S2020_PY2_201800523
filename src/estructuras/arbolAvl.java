@@ -5,6 +5,10 @@
  */
 package estructuras;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+
 /**
  *
  * @author David
@@ -14,6 +18,9 @@ public class arbolAvl {
     public nodoArbolAvl raiz;
     public nodoArbolAvl temp;
     boolean control = false;
+    String estructura;
+    int contador = 0;
+
     int peso(nodoArbolAvl nodo) {
 	if (nodo == null) {
 	    return 0;
@@ -71,7 +78,10 @@ public class arbolAvl {
 	categoria = categoria.toLowerCase();
 
 	if (nodo == null) {
-	    return (new nodoArbolAvl(categoria, carnetAutor));
+	    nodo = new nodoArbolAvl(categoria, carnetAutor);
+	    nodo.id = contador;
+	    contador++;
+	    return (nodo);
 	}
 
 	if (categoria.compareTo(nodo.categoria) < 0) {
@@ -79,6 +89,8 @@ public class arbolAvl {
 	} else if (categoria.compareTo(nodo.categoria) > 0) {
 	    nodo.derecha = insertar(nodo.derecha, categoria, carnetAutor);
 	} else if (categoria.compareTo(nodo.categoria) == 0) {
+	    nodo.id = contador;
+	    contador++;
 	    return nodo;
 	}
 
@@ -103,6 +115,8 @@ public class arbolAvl {
 	    nodo.derecha = girarDerecha(nodo.derecha);
 	    return girarIzquierda(nodo);
 	}
+	nodo.id = contador;
+	contador++;
 	return nodo;
     }
 
@@ -113,38 +127,40 @@ public class arbolAvl {
 	    preOrden(nodo.derecha);
 	}
     }
-    
-    public nodoArbolAvl buscar(String categoria){
+
+    public nodoArbolAvl buscar(String categoria) {
 	temp = null;
 	bsq(raiz, categoria);
 	return temp;
     }
-      public void bsq(nodoArbolAvl nodo, String categoria) {
+
+    public void bsq(nodoArbolAvl nodo, String categoria) {
 	if (nodo != null) {
-	  if(nodo.categoria == categoria){
-	      temp = nodo;
-	  }
-	    bsq(nodo.izquierda,categoria);
+	    if (nodo.categoria == categoria) {
+		temp = nodo;
+	    }
+	    bsq(nodo.izquierda, categoria);
 	    bsq(nodo.derecha, categoria);
-	    
+
 	}
-	
+
     }
 
-    public boolean verificarBorrar(nodoArbolAvl nodo, String categoria, int carnet){
+    public boolean verificarBorrar(nodoArbolAvl nodo, String categoria, int carnet) {
 	control = false;
 	vefBor(nodo, categoria, carnet);
-	
-	return  control;
+
+	return control;
     }
+
     public void vefBor(nodoArbolAvl nodo, String categoria, int carnet) {
 	categoria = categoria.toLowerCase();
 	if (nodo != null) {
-	  if(categoria.equals(nodo.categoria) && carnet == nodo.carnetAutor){
-	      control = true;
-	  }
-	    vefBor(nodo.izquierda,categoria,carnet);
-	    vefBor(nodo.derecha,categoria,carnet);
+	    if (categoria.equals(nodo.categoria) && carnet == nodo.carnetAutor) {
+		control = true;
+	    }
+	    vefBor(nodo.izquierda, categoria, carnet);
+	    vefBor(nodo.derecha, categoria, carnet);
 	}
     }
 
@@ -226,4 +242,220 @@ public class arbolAvl {
 	return raiz;
     }
 
+    void escribir(String contenido) {
+	try {
+	    String ruta = ".\\salida.txt";
+
+	    File file = new File(ruta);
+	    // Si el archivo no existe es creado
+	    if (!file.exists()) {
+
+		file.createNewFile();
+	    } else {
+		if (file.delete()) {
+		    file.createNewFile();
+		    System.out.println("El fichero ha sido borrado satisfactoriamente");
+		} else {
+		    System.out.println("El fichero no puede ser borrado");
+		}
+	    }
+
+	    FileWriter fw = new FileWriter(file);
+	    BufferedWriter bw = new BufferedWriter(fw);
+	    bw.write(contenido);
+	    bw.close();
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+    }
+
+    public void graficar() {
+
+	String encabezado = " digraph G {";
+
+	String fin = "}";
+	encabezado = encabezado + recGraf(this.raiz) + fin;
+
+	System.out.println(encabezado);
+	escribir(encabezado);
+
+	try {
+	    
+	    String dotPath = "dot";
+
+	    String entrada = getClass().getProtectionDomain().getCodeSource().getLocation() +"\\salida.txt";
+	    String salida = "c:\\grafo1.jpg";
+
+	    String parametro = "-Tjpg";
+	    String op = "-o";
+
+	    String[] cmd = new String[5];
+	    cmd[0] = dotPath;
+	    cmd[1] = parametro;
+	    cmd[2] = entrada;
+	    cmd[3] = op;
+	    cmd[4] = salida;
+
+	    for(int i = 0; i < 5; i ++){
+		System.out.println(cmd[i]);
+	    }
+	    Runtime rt = Runtime.getRuntime();
+
+	    rt.exec(cmd);
+
+	} catch (Exception ex) {
+	    ex.printStackTrace();
+	} finally {
+	}
+	
+    }
+
+    public String recGraf(nodoArbolAvl n) {
+	String nodos;
+	if (n.izquierda == null && n.derecha == null) {
+	    nodos = "node" + Integer.toString(n.id) + "[label = \"" + n.categoria + "\"];";
+	} else {
+	    nodos = "node" + Integer.toString(n.id) + "[label = \"" + n.categoria + "\"];";
+	}
+	if (n.izquierda != null) {
+	    nodos = nodos + recGraf(n.izquierda) + "node" + Integer.toString(n.id) + "->node"
+		    + Integer.toString(n.izquierda.id) + "\n";
+	}
+	if (n.derecha != null) {
+	    nodos = nodos + recGraf(n.derecha) + "node" + Integer.toString(n.id) + "->node"
+		    + Integer.toString(n.derecha.id) + "\n";
+	}
+
+	nodos = nodos + "node" + Integer.toString(raiz.id) + " [ label =\"" + raiz.categoria + "\"];\n";
+	return nodos;
+    }
+
+    /*void arbolBinario::graficarPre() {
+	ct = 0;
+	string encabezado = " digraph G { rankdir= LR;";
+
+	string fin = "}";
+	encabezado = encabezado + recPre(raiz);
+	string conecciones = "";
+	for (int i = 0; i < ct - 1; i++) {
+	    encabezado = encabezado + "node" + to_string(i) + "->node"
+		    + to_string(i + 1) + "\n";
+	}
+
+	encabezado = encabezado + fin;
+	ofstream file;
+	file.open("pre.txt", ios::out);
+	file << encabezado;
+	file.close();
+
+	string s1 = "dot -Tpng pre.txt -o D:/grafos/pre.png";
+
+	system(s1.c_str());
+	system("start D:/grafos/pre.png");
+    }
+
+    void arbolBinario::graficarIn() {
+	ct = 0;
+	string encabezado = " digraph G { rankdir= LR;";
+
+	string fin = "}";
+	encabezado = encabezado + recIn(raiz);
+	string conecciones = "";
+	for (int i = 0; i < ct - 1; i++) {
+	    encabezado = encabezado + "node" + to_string(i) + "->node"
+		    + to_string(i + 1) + ";\n";
+	}
+	encabezado = encabezado + fin;
+	ofstream file;
+	file.open("in.txt", ios::out);
+	file << encabezado;
+	file.close();
+
+	string s1 = "dot -Tpng in.txt -o D:/grafos/in.png";
+
+	system(s1.c_str());
+	system("start D:/grafos/in.png");
+    }
+
+    void arbolBinario::graficarPos() {
+	ct = 0;
+	string encabezado = " digraph G { rankdir= LR;";
+
+	string fin = "}";
+	encabezado = encabezado + recPos(raiz);
+	string conecciones = "";
+	for (int i = 0; i < ct - 1; i++) {
+	    encabezado = encabezado + "node" + to_string(i) + "->node"
+		    + to_string(i + 1) + ";\n";
+	}
+	encabezado = encabezado + fin;
+	ofstream file;
+	file.open("pos.txt", ios::out);
+	file << encabezado;
+	file.close();
+
+	string s1 = "dot -Tpng pos.txt -o D:/grafos/pos.png";
+
+	system(s1.c_str());
+	system("start D:/grafos/pos.png");
+    }
+
+    string arbolBinario
+
+    ::recPre(nodoArbol 
+	 
+	 
+	* n) {
+	if (n == NULL) {
+	    return "";
+	}
+
+	string nodos;
+	nodos = "node" + to_string(ct) + "[label = \"" + n -> nombre + "\"];";
+	ct++;
+
+	nodos = nodos + recPre(n -> izq);
+	nodos = nodos + recPre(n -> der);
+
+	return nodos;
+
+    }
+    string arbolBinario
+
+    ::recIn(nodoArbol 
+	 
+	 
+	* n) {
+	if (n == NULL) {
+	    return "";
+	}
+
+	string nodos;
+
+	nodos = nodos + recIn(n -> izq);
+	nodos = nodos + "node" + to_string(ct) + "[label = \"" + n -> nombre + "\"];";
+	ct++;
+	nodos = nodos + recIn(n -> der);
+
+	return nodos;
+    }
+    string arbolBinario
+
+    ::recPos(nodoArbol 
+	 
+	 
+	* n) {
+	if (n == NULL) {
+	    return "";
+	}
+
+	string nodos;
+
+	nodos = nodos + recPos(n -> izq);
+	nodos = nodos + recPos(n -> der);
+	nodos = nodos + "node" + to_string(ct) + "[label = \"" + n -> nombre + "\"];";
+	ct++;
+	return nodos;
+    }
+     */
 }

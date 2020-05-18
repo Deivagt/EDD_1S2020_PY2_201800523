@@ -14,8 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-  testButtons ti = new testButtons();
-  //  menuPrincipal menu = new menuPrincipal();
+    testButtons ti = new testButtons();
 
     /**
      * Creates new form Login
@@ -23,7 +22,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
 	initComponents();
 	setLocationRelativeTo(null);
-	
+
     }
 
     /**
@@ -70,6 +69,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Contraseña:");
 
+        contra.setText("123456");
         contra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contraActionPerformed(evt);
@@ -150,14 +150,20 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_contraActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-	/*System.out.println(Integer.parseInt(carnet.getText()));
+	//System.out.println(Integer.parseInt(carnet.getText()));
 
 	nodoLS temp = Global.Globales.tablaDispersion.buscar(Integer.parseInt(carnet.getText()));
 	if (temp != null) {
-	    if (contra.getText().equals(temp.getContenido().getPass())) {
-		Global.Globales.carnetInicioSesion = temp.getContenido().getCarnet();
+	    String passEntrada = Global.Globales.hashear(contra.getText());
+	    if (passEntrada.equals(temp.getContenido().getPass())) {
+		//System.out.println(temp.getContenido().getPass());
+		//System.out.println("1." + passEntrada);
+
+		Global.Globales.usuarioActivo = temp;
+		
 		dispose();
-		if(menu != null){
+		menuPrincipal menu = new menuPrincipal();
+		if (menu != null) {
 		    menu.dispose();
 		}
 		menu.setVisible(true);
@@ -167,7 +173,7 @@ public class Login extends javax.swing.JFrame {
 	    }
 	} else {
 	    JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
-	}*/
+	}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -181,7 +187,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+	// TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

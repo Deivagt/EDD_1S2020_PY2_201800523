@@ -15,6 +15,7 @@ public class nodoArbolAvl {
    public arbolB librosCategoria;
    public int carnetAutor;
     int peso;
+    int id;
     nodoArbolAvl izquierda;
     nodoArbolAvl derecha;
     

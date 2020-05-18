@@ -5,19 +5,22 @@
  */
 package estructuras;
 
-/**
- *
- * @author David
- */
+import java.math.BigInteger;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.MessageDigest;
+
+
 public class usuario {
+
     int carnet;
     String nombre;
     String apellido;
     String carrera;
     String pass;
-    
-    public usuario(){
-	
+
+    public usuario() {
+
     }
 
     public int getCarnet() {
@@ -25,6 +28,7 @@ public class usuario {
     }
 
     public void setCarnet(int carnet) {
+
 	this.carnet = carnet;
     }
 
@@ -57,9 +61,31 @@ public class usuario {
     }
 
     public void setPass(String pass) {
-	this.pass = pass;
+
+	try {
+
+	    // Static getInstance method is called with hashing MD5 
+	    MessageDigest md = MessageDigest.getInstance("MD5");
+
+	    // digest() method is called to calculate message digest 
+	    //  of an input digest() return array of byte 
+	    byte[] messageDigest = md.digest(pass.getBytes());
+
+	    // Convert byte array into signum representation 
+	    BigInteger no = new BigInteger(1, messageDigest);
+
+	    // Convert message digest into hex value 
+	    String textoHash = no.toString(16);
+	    while (textoHash.length() < 32) {
+		textoHash = "0" + textoHash;
+	    }
+	    this.pass = textoHash;
+
+	} // For specifying wrong message digest algorithms 
+	catch (NoSuchAlgorithmException e) {
+	    throw new RuntimeException(e);
+	}
+
     }
-    
-    
-    
+
 }

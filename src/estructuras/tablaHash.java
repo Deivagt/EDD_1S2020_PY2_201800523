@@ -45,6 +45,15 @@ public class tablaHash {
 	}
 	return null;
     }
+    
+    public void eliminar(int carnet){
+	for (int i = 0; i < tamanio; i++) {
+	    nodoLS busqueda = data[i].buscar(carnet);
+	    if (busqueda != null) {
+		data[i].eliminar(carnet);
+	    }
+	}
+    }
 
     public void imprimir() {
 	for (int i = 0; i < tamanio; i++) {

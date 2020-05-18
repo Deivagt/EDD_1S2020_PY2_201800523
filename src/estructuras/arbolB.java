@@ -13,6 +13,7 @@ public class arbolB {
 
     public nodoArbolB raiz;
     public int minimo;
+    String encabezado;
 
     // Constructor (Initializes tree as empty) 
     public arbolB(int minimo) {
@@ -91,4 +92,7 @@ public class arbolB {
 	    }
 	}
     }
+     
+  
+     
 }
