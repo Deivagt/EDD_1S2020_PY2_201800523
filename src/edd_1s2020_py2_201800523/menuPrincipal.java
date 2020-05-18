@@ -5,6 +5,9 @@
  */
 package edd_1s2020_py2_201800523;
 
+import estructuras.libro;
+import estructuras.nodoArbolAvl;
+
 /**
  *
  * @author David
@@ -12,7 +15,7 @@ package edd_1s2020_py2_201800523;
 public class menuPrincipal extends javax.swing.JFrame {
 
     misDatos datos = new misDatos();
-    Reportes reportes = new Reportes();
+    Reportes reportes;
 
     /**
      * Creates new form menuPrincipal
@@ -90,23 +93,22 @@ public class menuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titulo)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jButton4)
+                        .addGap(15, 15, 15)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(titulo)
-                        .addGap(0, 231, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jButton4)
-                .addGap(15, 15, 15)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton3)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,9 +120,9 @@ public class menuPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton1)
                     .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addGap(14, 14, 14))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,9 +155,10 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 	dispose();
+	nodoArbolAvl[] cat = Global.Globales.arbolCategorias.listaCategorias();
 	if (reportes != null) {
 	    reportes.dispose();
-	    reportes = new Reportes();
+	    reportes = new Reportes(cat);
 	}
 	reportes.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed

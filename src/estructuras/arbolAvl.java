@@ -5,11 +5,11 @@
  */
 package estructuras;
 
-import com.sun.xml.internal.ws.util.StringUtils;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.text.Normalizer;
+
 
 /**
  *
@@ -138,7 +138,7 @@ public class arbolAvl {
 
     public void bsq(nodoArbolAvl nodo, String categoria) {
 	if (nodo != null) {
-	 
+
 	    if (nodo.categoria.equals(categoria)) {
 		temporal = nodo;
 	    }
@@ -276,10 +276,10 @@ public class arbolAvl {
 	return file;
     }
 
-    public void graficar(int i) {
+    public String graficar(int i) {
 
 	String encabezado = "digraph G {";
-
+	String salida = "";
 	String fin = "}";
 	encabezado = encabezado + recGraf(this.raiz) + fin;
 
@@ -291,7 +291,7 @@ public class arbolAvl {
 	    String dotPath = "dot";
 
 	    String entrada = nuevo.getAbsolutePath();
-	    String salida = System.getProperty("user.home") + "\\desktop\\salida" + "\\grafo" + i + ".jpg";
+	    salida = System.getProperty("user.home") + "\\desktop\\salida" + "\\grafo" + i + ".jpg";
 
 	    String parametro = "-Tjpg";
 	    String op = "-o";
@@ -312,15 +312,19 @@ public class arbolAvl {
 	} finally {
 	}
 
+	return salida;
     }
 
     public String recGraf(nodoArbolAvl n) {
 	String nodos;
+	//Primero declaro el nodo donde estoy
 	if (n.izquierda == null && n.derecha == null) {
 	    nodos = "node" + Integer.toString(n.id) + "[label = \"" + n.categoria + " " + n.cantidad + "\"];";
 	} else {
 	    nodos = "node" + Integer.toString(n.id) + "[label = \"" + n.categoria + " " + n.cantidad + "\"];";
 	}
+	
+	//Declaro nuevos nodos y flechas
 	if (n.izquierda != null) {
 	    nodos = nodos + recGraf(n.izquierda) + "node" + Integer.toString(n.id) + "->node"
 		    + Integer.toString(n.izquierda.id) + "\n";
@@ -334,10 +338,10 @@ public class arbolAvl {
 	return nodos;
     }
 
-    public void graficarPre() {
+    public String graficarPre() {
 	ct = 0;
 	String encabezado = " digraph G { rankdir= LR;";
-
+	String salida = "";
 	String fin = "}";
 	encabezado = encabezado + recPre(raiz);
 	String conexiones = "";
@@ -353,7 +357,7 @@ public class arbolAvl {
 	    String dotPath = "dot";
 
 	    String entrada = nuevo.getAbsolutePath();
-	    String salida = System.getProperty("user.home") + "\\desktop\\salida" + "\\grafoPre.jpg";
+	    salida = System.getProperty("user.home") + "\\desktop\\salida" + "\\grafoPre.jpg";
 
 	    String parametro = "-Tjpg";
 	    String op = "-o";
@@ -368,6 +372,7 @@ public class arbolAvl {
 	    ex.printStackTrace();
 	} finally {
 	}
+	return salida;
 
     }
 
@@ -387,10 +392,10 @@ public class arbolAvl {
 
     }
 
-    public void graficarIn() {
+    public String graficarIn() {
 	ct = 0;
 	String encabezado = " digraph G { rankdir= LR;\n";
-
+	String salida = "";
 	String fin = "}";
 	encabezado = encabezado + recIn(raiz);
 	String conexiones = "";
@@ -406,7 +411,7 @@ public class arbolAvl {
 	    String dotPath = "dot";
 
 	    String entrada = nuevo.getAbsolutePath();
-	    String salida = System.getProperty("user.home") + "\\desktop\\salida" + "\\grafoIn.jpg";
+	    salida = System.getProperty("user.home") + "\\desktop\\salida" + "\\grafoIn.jpg";
 
 	    String parametro = "-Tjpg";
 	    String op = "-o";
@@ -421,6 +426,7 @@ public class arbolAvl {
 	    ex.printStackTrace();
 	} finally {
 	}
+	return salida;
 
     }
 
@@ -430,9 +436,9 @@ public class arbolAvl {
     public nodoArbolAvl[] listaCategorias() {
 	categorias = null;
 	if (raiz != null) {
-	    
+
 	    recCantidad(raiz);
-	   
+
 	    categorias = new nodoArbolAvl[cantidad];
 	    cantidad = 0;
 	    recLlenar(raiz);
@@ -475,10 +481,10 @@ public class arbolAvl {
 
     }
 
-    public void graficarPos() {
+    public String graficarPos() {
 	ct = 0;
 	String encabezado = " digraph G { rankdir= LR;\n";
-
+	String salida = "";
 	String fin = "}";
 	encabezado = encabezado + recPos(raiz);
 	String conexiones = "";
@@ -494,7 +500,7 @@ public class arbolAvl {
 	    String dotPath = "dot";
 
 	    String entrada = nuevo.getAbsolutePath();
-	    String salida = System.getProperty("user.home") + "\\desktop\\salida" + "\\grafoPos.jpg";
+	    salida = System.getProperty("user.home") + "\\desktop\\salida" + "\\grafoPos.jpg";
 
 	    String parametro = "-Tjpg";
 	    String op = "-o";
@@ -510,6 +516,7 @@ public class arbolAvl {
 	} finally {
 	}
 
+	return salida;
     }
 
     String recPos(nodoArbolAvl n) {

@@ -5,6 +5,7 @@
  */
 package estructuras;
 
+import edd_1s2020_py2_201800523.Visor;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -102,9 +103,9 @@ public class tablaHash {
 	return file;
     }
 
-    public void graficar() {
+    public String graficar() {
 	String encabezado = "digraph G {\n";
-
+	String salida = "";
 	String fin = "}";
 	encabezado = encabezado + graficadora() + fin;
 
@@ -117,7 +118,7 @@ public class tablaHash {
 	    String dotPath = "dot";
 
 	    String entrada = nuevo.getAbsolutePath();
-	    String salida = System.getProperty("user.home") + "\\desktop\\salida" + "\\grafoDispersa" + ".jpg";
+	    salida = System.getProperty("user.home") + "\\desktop\\salida" + "\\grafoDispersa" + ".jpg";
 
 	    String parametro = "-Tjpg";
 	    String op = "-o";
@@ -125,10 +126,13 @@ public class tablaHash {
 	    String cmd = dotPath + " " + parametro + " " + entrada + " " + op + " " + salida;
 
 	    Runtime.getRuntime().exec(cmd);
+	
+
 	} catch (Exception ex) {
 	    ex.printStackTrace();
 	} finally {
 	}
+	return salida;
     }
 
     public String graficadora() {

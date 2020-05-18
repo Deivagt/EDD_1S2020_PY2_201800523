@@ -16,6 +16,7 @@ public class nodoArbolB {
     nodoArbolB[] hijos;
     int cantidad;
     boolean esHoja;
+    int id;
 
     int contador;
 
