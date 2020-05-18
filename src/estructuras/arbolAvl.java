@@ -5,11 +5,9 @@
  */
 package estructuras;
 
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-
 
 /**
  *
@@ -319,11 +317,11 @@ public class arbolAvl {
 	String nodos;
 	//Primero declaro el nodo donde estoy
 	if (n.izquierda == null && n.derecha == null) {
-	    nodos = "node" + Integer.toString(n.id) + "[label = \"" + n.categoria + " " + n.cantidad + "\"];";
+	    nodos = "node" + Integer.toString(n.id) + "[label = \"" + n.categoria + " \\n " + n.cantidad + "\"];";
 	} else {
-	    nodos = "node" + Integer.toString(n.id) + "[label = \"" + n.categoria + " " + n.cantidad + "\"];";
+	    nodos = "node" + Integer.toString(n.id) + "[label = \"" + n.categoria + " \\n  " + n.cantidad + "\"];";
 	}
-	
+
 	//Declaro nuevos nodos y flechas
 	if (n.izquierda != null) {
 	    nodos = nodos + recGraf(n.izquierda) + "node" + Integer.toString(n.id) + "->node"
@@ -334,7 +332,7 @@ public class arbolAvl {
 		    + Integer.toString(n.derecha.id) + "\n";
 	}
 
-	nodos = nodos + "node" + Integer.toString(raiz.id) + " [ label =\"" + raiz.categoria + " " + n.cantidad + "\"];\n";
+	nodos = nodos + "node" + Integer.toString(raiz.id) + " [ label =\"" + raiz.categoria + " \\n " + n.cantidad + "\"];\n";
 	return nodos;
     }
 
@@ -382,7 +380,7 @@ public class arbolAvl {
 	}
 
 	String nodos;
-	nodos = "node" + Integer.toString(ct) + "[label = \"" + n.categoria + " " + n.cantidad + "\"];";
+	nodos = "node" + Integer.toString(ct) + "[label = \"" + n.categoria + " \\n " + n.cantidad + "\"];";
 	ct++;
 
 	nodos = nodos + recPre(n.izquierda);
@@ -472,7 +470,7 @@ public class arbolAvl {
 
 	String nodos = recIn(n.izquierda);
 
-	nodos = nodos + "node" + Integer.toString(ct) + "[label = \"" + n.categoria + " " + n.cantidad + "\"];";
+	nodos = nodos + "node" + Integer.toString(ct) + "[label = \"" + n.categoria + " \\n " + n.cantidad + "\"];";
 	ct++;
 
 	nodos = nodos + recIn(n.derecha);
@@ -526,96 +524,11 @@ public class arbolAvl {
 
 	String nodos = recPos(n.izquierda);
 	nodos = nodos + recPos(n.derecha);
-	nodos = nodos + "node" + Integer.toString(ct) + "[label = \"" + n.categoria + " " + n.cantidad + "\"];";
+	nodos = nodos + "node" + Integer.toString(ct) + "[label = \"" + n.categoria + " \\n " + n.cantidad + "\"];";
 	ct++;
 
 	return nodos;
 
     }
-    /*void arbolBinario::graficarIn() {
-	ct = 0;
-	string encabezado = " digraph G { rankdir= LR;";
 
-	string fin = "}";
-	encabezado = encabezado + recIn(raiz);
-	string conecciones = "";
-	for (int i = 0; i < ct - 1; i++) {
-	    encabezado = encabezado + "node" + to_string(i) + "->node"
-		    + to_string(i + 1) + ";\n";
-	}
-	encabezado = encabezado + fin;
-	ofstream file;
-	file.open("in.txt", ios::out);
-	file << encabezado;
-	file.close();
-
-	string s1 = "dot -Tpng in.txt -o D:/grafos/in.png";
-
-	system(s1.c_str());
-	system("start D:/grafos/in.png");
-    }
-
-    void arbolBinario::graficarPos() {
-	ct = 0;
-	string encabezado = " digraph G { rankdir= LR;";
-
-	string fin = "}";
-	encabezado = encabezado + recPos(raiz);
-	string conecciones = "";
-	for (int i = 0; i < ct - 1; i++) {
-	    encabezado = encabezado + "node" + to_string(i) + "->node"
-		    + to_string(i + 1) + ";\n";
-	}
-	encabezado = encabezado + fin;
-	ofstream file;
-	file.open("pos.txt", ios::out);
-	file << encabezado;
-	file.close();
-
-	string s1 = "dot -Tpng pos.txt -o D:/grafos/pos.png";
-
-	system(s1.c_str());
-	system("start D:/grafos/pos.png");
-    }
-    string arbolBinario
-
-    ::recIn(nodoArbol 
-	 
-	 
-	 
-	* n) {
-	if (n == NULL) {
-	    return "";
-	}
-
-	string nodos;
-
-	nodos = nodos + recIn(n -> izq);
-	nodos = nodos + "node" + to_string(ct) + "[label = \"" + n -> nombre + "\"];";
-	ct++;
-	nodos = nodos + recIn(n -> der);
-
-	return nodos;
-    }
-    string arbolBinario
-
-    ::recPos(nodoArbol 
-	 
-	 
-	 
-	* n) {
-	if (n == NULL) {
-	    return "";
-	}
-
-	string nodos;
-
-	nodos = nodos + recPos(n -> izq);
-	nodos = nodos + recPos(n -> der);
-	nodos = nodos + "node" + to_string(ct) + "[label = \"" + n -> nombre + "\"];";
-	ct++;
-	return nodos;
-    }
-
-     */
 }

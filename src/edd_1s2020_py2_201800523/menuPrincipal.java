@@ -156,10 +156,8 @@ public class menuPrincipal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 	dispose();
 	nodoArbolAvl[] cat = Global.Globales.arbolCategorias.listaCategorias();
-	if (reportes != null) {
-	    reportes.dispose();
-	    reportes = new Reportes(cat);
-	}
+	reportes = new Reportes(cat);
+
 	reportes.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 

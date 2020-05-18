@@ -1,16 +1,11 @@
-digraph G { 
-node [shape = record,height=.1];
-nodo0[label = "<f0> |Titulo: Optimización de rendimiento y aseguramiento de inocuidad en la industria de quesería; una guía para la pequeña y mediana empresa \n ISBN: 10774| <f1>|Titulo: La idea del hombre \n ISBN: 10786| <f2>|Titulo: El ocaso de un régimen \n ISBN: 10844| <f3>|Titulo: Historia de la provincia de San Vicente de Chiapa y Guatemala de la orden de Predicadores \n ISBN: 10848| <f4>|Titulo: Psicología aplicada a la enseñanza \n ISBN: 10930| <f5>"];
-nodo1[label = "<f0> |Titulo: Las Ventas en el mundo actual \n ISBN: 10772| <f1>|Titulo: Procesamiento de carnes y embutidos; elaboración, estandarización, control de calidad \n ISBN: 10773| <f2>"];
-"nodo0":f0 -> "nodo1"
-nodo2[label = "<f0> |Titulo: Producción higiénica de la leche cruda; una guía para la pequeña y mediana empresa \n ISBN: 10775| <f1>|Titulo: Moral para intelectuales \n ISBN: 10783| <f2>"];
-"nodo0":f1 -> "nodo2"
-nodo3[label = "<f0> |Titulo: Constitución pastoral Gaudium et spes, sobre la Iglesia en el mundo actual \n ISBN: 10840| <f1>|Titulo: Introducción a la ética \n ISBN: 10842| <f2>"];
-"nodo0":f2 -> "nodo3"
-nodo4[label = "<f0> |Titulo: Educación política nacional \n ISBN: 10846| <f1>|Titulo: De hombres sociales y movimientos políticos / C. Wright Mills. \n ISBN: 10847| <f2>"];
-"nodo0":f3 -> "nodo4"
-nodo5[label = "<f0> |Titulo: Evaluación de impacto en formación empresarial ; el caso FUNDES \n ISBN: 10927| <f1>|Titulo: Cómo resolver el problema de falta de tiempo \n ISBN: 10928| <f2>"];
-"nodo0":f4 -> "nodo5"
-nodo6[label = "<f0> |Titulo: Pan Am: an airline and its aircraft \n ISBN: 10932| <f1>|Titulo: La Mujer de pelo largo / Leonor Paz y Paz G. \n ISBN: 10933| <f2>|Titulo: El libro de la piedad y de la muerte \n ISBN: 10934| <f3>"];
-"nodo0":f5 -> "nodo6"
+ digraph G { rankdir= LR;
+node0[label = "biografia \n 3"];node1[label = "drama \n 16"];node2[label = "ensayo \n 12"];node3[label = "consulta \n 12"];node4[label = "literatura \n 9"];node5[label = "revista \n 6"];node6[label = "épico \n 8"];node7[label = "sagas \n 2"];node8[label = "lírico \n 13"];node9[label = "informativos \n 18"];node0->node1
+node1->node2
+node2->node3
+node3->node4
+node4->node5
+node5->node6
+node6->node7
+node7->node8
+node8->node9
 }

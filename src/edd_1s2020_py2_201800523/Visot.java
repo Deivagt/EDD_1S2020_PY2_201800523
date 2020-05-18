@@ -12,9 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
-public class Visor extends JFrame {
+public class Visot extends JFrame {
 
-    public Visor(String ruta) {
+    public Visot(String ruta) {
 	super("Visor");
 	ImageIcon ii = new ImageIcon(ruta);
 
