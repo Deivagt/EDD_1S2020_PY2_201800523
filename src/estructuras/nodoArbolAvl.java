@@ -31,4 +31,7 @@ public class nodoArbolAvl {
 	return cantidad;
     }
     
+     public String toString() {
+      return categoria;
+   }
 }

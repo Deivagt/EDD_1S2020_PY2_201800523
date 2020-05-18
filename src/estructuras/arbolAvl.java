@@ -35,8 +35,6 @@ public class arbolAvl {
     int maximo(int a, int b) {
 	return (a > b) ? a : b;
     }
-    
-    
 
     nodoArbolAvl girarDerecha(nodoArbolAvl nodo) {
 
@@ -140,7 +138,7 @@ public class arbolAvl {
 
     public void bsq(nodoArbolAvl nodo, String categoria) {
 	if (nodo != null) {
-	    System.out.println(categoria + " " + nodo.categoria);
+	 
 	    if (nodo.categoria.equals(categoria)) {
 		temporal = nodo;
 	    }
@@ -379,7 +377,7 @@ public class arbolAvl {
 	}
 
 	String nodos;
-	nodos = "node" + Integer.toString(ct) + "[label = \"" + n.categoria +" "+ n.cantidad+ "\"];";
+	nodos = "node" + Integer.toString(ct) + "[label = \"" + n.categoria + " " + n.cantidad + "\"];";
 	ct++;
 
 	nodos = nodos + recPre(n.izquierda);
@@ -426,6 +424,41 @@ public class arbolAvl {
 
     }
 
+    int cantidad;
+    nodoArbolAvl[] categorias;
+
+    public nodoArbolAvl[] listaCategorias() {
+	categorias = null;
+	if (raiz != null) {
+	    
+	    recCantidad(raiz);
+	   
+	    categorias = new nodoArbolAvl[cantidad];
+	    cantidad = 0;
+	    recLlenar(raiz);
+
+	}
+
+	return categorias;
+    }
+
+    void recCantidad(nodoArbolAvl nodo) {
+	if (nodo != null) {
+	    cantidad++;
+	    recCantidad(nodo.izquierda);
+	    recCantidad(nodo.derecha);
+	}
+    }
+
+    void recLlenar(nodoArbolAvl nodo) {
+	if (nodo != null) {
+	    categorias[cantidad] = nodo;
+	    cantidad++;
+	    recLlenar(nodo.izquierda);
+	    recLlenar(nodo.derecha);
+	}
+    }
+
     String recIn(nodoArbolAvl n) {
 	if (n == null) {
 	    return "";
@@ -433,7 +466,7 @@ public class arbolAvl {
 
 	String nodos = recIn(n.izquierda);
 
-	nodos = nodos + "node" + Integer.toString(ct) + "[label = \"" + n.categoria +" "+ n.cantidad+ "\"];";
+	nodos = nodos + "node" + Integer.toString(ct) + "[label = \"" + n.categoria + " " + n.cantidad + "\"];";
 	ct++;
 
 	nodos = nodos + recIn(n.derecha);
@@ -486,7 +519,7 @@ public class arbolAvl {
 
 	String nodos = recPos(n.izquierda);
 	nodos = nodos + recPos(n.derecha);
-	nodos = nodos + "node" + Integer.toString(ct) + "[label = \"" + n.categoria +" "+ n.cantidad+ "\"];";
+	nodos = nodos + "node" + Integer.toString(ct) + "[label = \"" + n.categoria + " " + n.cantidad + "\"];";
 	ct++;
 
 	return nodos;

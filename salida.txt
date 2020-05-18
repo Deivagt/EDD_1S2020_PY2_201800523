@@ -1,11 +1,20 @@
- digraph G { rankdir= LR;
-node0[label = "biografia 3"];node1[label = "drama 16"];node2[label = "ensayo 12"];node3[label = "consulta 12"];node4[label = "literatura 9"];node5[label = "revista 6"];node6[label = "épico 8"];node7[label = "sagas 2"];node8[label = "lírico 13"];node9[label = "informativos 18"];node0->node1
-node1->node2
-node2->node3
-node3->node4
-node4->node5
-node5->node6
-node6->node7
-node7->node8
-node8->node9
+digraph G {node28[label = "informativos 18"];node19[label = "consulta 12"];node3[label = "biografia 3"];node28 [ label ="informativos 3"];
+node19->node3
+node18[label = "ensayo 12"];node17[label = "drama 16"];node28 [ label ="informativos 16"];
+node18->node17
+node28 [ label ="informativos 12"];
+node19->node18
+node28 [ label ="informativos 12"];
+node28->node19
+node27[label = "lírico 13"];node12[label = "literatura 9"];node28 [ label ="informativos 9"];
+node27->node12
+node25[label = "sagas 2"];node26[label = "revista 6"];node28 [ label ="informativos 6"];
+node25->node26
+node22[label = "épico 8"];node28 [ label ="informativos 8"];
+node25->node22
+node28 [ label ="informativos 2"];
+node27->node25
+node28 [ label ="informativos 13"];
+node28->node27
+node28 [ label ="informativos 18"];
 }
