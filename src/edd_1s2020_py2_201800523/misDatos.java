@@ -54,10 +54,9 @@ public class misDatos extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         contra1 = new javax.swing.JTextField();
         change = new javax.swing.JCheckBox();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Edita tus Datos");
@@ -99,13 +98,6 @@ public class misDatos extends javax.swing.JFrame {
         change.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 changeActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -167,9 +159,7 @@ public class misDatos extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton3)))
                 .addContainerGap())
         );
@@ -211,9 +201,7 @@ public class misDatos extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                .addComponent(jButton3)
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -273,16 +261,6 @@ public class misDatos extends javax.swing.JFrame {
 	}
     }//GEN-LAST:event_changeActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-	menuPrincipal menu = new menuPrincipal();
-	dispose();
-	if (menu != null) {
-	    menu.dispose();
-	}
-	menu.setVisible(true);
-
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 	int dialogButton = JOptionPane.YES_NO_OPTION;
 	JOptionPane.showConfirmDialog(null, "¿Estas seguro? Ya no podras acceder a tus libros.", "WARNING", dialogButton);
@@ -339,7 +317,6 @@ public class misDatos extends javax.swing.JFrame {
     private javax.swing.JTextField contra;
     private javax.swing.JTextField contra1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

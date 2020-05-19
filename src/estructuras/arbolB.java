@@ -119,13 +119,21 @@ public class arbolB {
 
 	}
     }
+    public boolean estaVacio(){
+	if (raiz == null) {
+	 
+	    return true;
+	}else{
+	      return false;
+	}
+    }
 
     public void borrar(int isbn) {
 	if (raiz == null) {
 	    System.out.println("El arbol esta vacio");
 	    return;
 	}
-
+	cantidad--;
 	raiz.borrar(isbn);
 	if (raiz.cantidad == 0) {
 	    nodoArbolB temp = raiz;

@@ -267,19 +267,32 @@ public class misLibros extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 	int busqueda = Integer.parseInt(oldISBN.getText());
 	arbolB temp = Global.Globales.arbolCategorias.search1(busqueda);
-	if (temp != null) {
-	   /* int i = 0;
-	    while (i < temp.cantidad && busqueda > temp.libros[i].isbn) {
+	try {
+	    nodoArbolB temp1 = Global.Globales.arbolCategorias.buscar(nov.categoria).librosCategoria.buscar(busqueda);
+	    if (temp != null) {
+		int i = 0;
+		while (i < temp1.cantidad && busqueda > temp1.libros[i].isbn) {
 
-		i++;
-	    }*/
-	   temp.borrar(busqueda);
-	    dispose();
-	    
+		    i++;
+		}
 
-	} else {
-	    JOptionPane.showMessageDialog(null, "El libro no existe");
+		if (temp1.libros[i].carnetUsuarioAdd == Global.Globales.usuarioActivo.getContenido().getCarnet()) {
+		    temp.borrar(busqueda);
+		    
+		    
+		    JOptionPane.showMessageDialog(null, "Hecho");
+		    dispose();
+		} else {
+		    JOptionPane.showMessageDialog(null, "El libro no es tuyo");
+		}
+
+	    } else {
+		JOptionPane.showMessageDialog(null, "El libro no existe");
+	    }
+	} catch (NullPointerException e) {
+	    JOptionPane.showMessageDialog(null, "El libro no es tuyo");
 	}
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

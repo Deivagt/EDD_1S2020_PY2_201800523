@@ -280,7 +280,7 @@ public class arbolAvl {
 	    raiz.derecha = girarDerecha(raiz.derecha);
 	    return girarIzquierda(raiz);
 	}
-
+	cantidad--;
 	return raiz;
     }
 
