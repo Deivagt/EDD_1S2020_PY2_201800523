@@ -70,14 +70,11 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Contraseña:");
 
-        contra.setText("123456");
         contra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 contraActionPerformed(evt);
             }
         });
-
-        carnet.setText("201503476");
 
         jButton3.setText("Registrarse");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
