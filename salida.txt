@@ -1,11 +1,4 @@
- digraph G { rankdir= LR;
-node0[label = "biografia \n 3"];node1[label = "drama \n 16"];node2[label = "ensayo \n 12"];node3[label = "consulta \n 12"];node4[label = "literatura \n 9"];node5[label = "revista \n 6"];node6[label = "épico \n 8"];node7[label = "sagas \n 2"];node8[label = "lírico \n 13"];node9[label = "informativos \n 18"];node0->node1
-node1->node2
-node2->node3
-node3->node4
-node4->node5
-node5->node6
-node6->node7
-node7->node8
-node8->node9
+digraph G { 
+node [shape = record,height=.1];
+nodo0[label = "<f0> |Titulo: 12 \n ISBN: 12| <f1>"];
 }

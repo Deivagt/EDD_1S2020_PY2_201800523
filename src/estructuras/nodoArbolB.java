@@ -14,7 +14,7 @@ public class nodoArbolB {
     public libro[] libros;
     int minimo;
     nodoArbolB[] hijos;
-    int cantidad;
+    public int cantidad;
     boolean esHoja;
     int id;
 
@@ -23,7 +23,7 @@ public class nodoArbolB {
     public nodoArbolB(int minimo, boolean esHoja) {
 	this.minimo = minimo;
 	this.esHoja = esHoja;
-	this.libros = new libro[2 * minimo-1];
+	this.libros = new libro[2 * minimo - 1];
 	this.hijos = new nodoArbolB[2 * minimo];
 	this.cantidad = 0;
 
@@ -89,13 +89,15 @@ public class nodoArbolB {
 
     public nodoArbolB buscar(int isbn) {
 	int i = 0;
-	while (i < cantidad && isbn > libros[i].isbn) {
+	while (i < this.cantidad && isbn > libros[i].isbn) {
 	    System.out.println(libros[i].isbn);
 	    i++;
 	}
-	if (libros[i] != null) {
-	    if (isbn == libros[i].isbn) {
-		return this;
+	if (i < libros.length) {
+	    if (libros[i] != null) {
+		if (isbn == libros[i].isbn) {
+		    return this;
+		}
 	    }
 	}
 

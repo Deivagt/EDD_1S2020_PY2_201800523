@@ -97,7 +97,7 @@ public class listaSimpleHash {
 	int contador = 0;
 
 	while (temp != ultimo) {
-	    nodos = nodos + "Casilla" + i + "nodo" + contador + "[label = \"" + temp.getContenido().getNombre() + " " + temp.getContenido().getCarnet() + "\"];\n";
+	    nodos = nodos + "Casilla" + i + "nodo" + contador + "[label = \"" + temp.getContenido().getNombre() + " " + temp.getContenido().getCarnet() + " \\n " + temp.getContenido().getPass() + "\"];\n";
 	    if (temp.siguiente != ultimo) {
 		nodos = nodos + "Casilla" + i + "nodo" + contador + "->Casilla" + i + "nodo" + (contador + 1) + "\n";
 	    }

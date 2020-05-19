@@ -5,7 +5,7 @@
  */
 package estructuras;
 
-import edd_1s2020_py2_201800523.Visor;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

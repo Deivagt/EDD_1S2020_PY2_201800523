@@ -134,6 +134,7 @@ public class arbolAvl {
 	return temporal;
     }
 
+
     public void bsq(nodoArbolAvl nodo, String categoria) {
 	if (nodo != null) {
 
@@ -145,6 +146,24 @@ public class arbolAvl {
 
 	}
 
+    }
+        nodoArbolB nuevaTemp;
+    public nodoArbolB search(int isbn){
+	nuevaTemp = null;
+	src(raiz, isbn);
+	return nuevaTemp;
+    }
+    void src(nodoArbolAvl nodo, int isbn){
+	if (nodo != null) {
+	    nodoArbolB t = nodo.librosCategoria.buscar(isbn);
+
+	    if (t != null) {
+		nuevaTemp = t;
+	    }
+	    src(nodo.izquierda, isbn);
+	    src(nodo.derecha, isbn);
+
+	}
     }
 
     public boolean verificarBorrar(nodoArbolAvl nodo, String categoria, int carnet) {

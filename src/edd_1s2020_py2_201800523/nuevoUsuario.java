@@ -210,6 +210,7 @@ public class nuevoUsuario extends javax.swing.JFrame {
 	}
 
 	if (!contra.getText().equals(contra1.getText())) {
+	        control = false;
 	    JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
 
 	}
