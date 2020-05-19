@@ -25,7 +25,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     Reportes reportes;
     Biblioteca biblioteca;
     nuevoLibro nuevoLibro1;
-    misLibros misBooks;
+
     nodoArbolAvl[] cat;
 
     /**
@@ -51,8 +51,6 @@ public class menuPrincipal extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -93,20 +91,6 @@ public class menuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Cargar Libros");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("NUevo Libro");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
         jMenu1.setText("Mis Datos");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -140,32 +124,24 @@ public class menuPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(titulo)
-                .addGap(97, 97, 97)
-                .addComponent(jButton5)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6)
-                .addGap(34, 34, 34))
+                .addGap(34, 302, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(titulo)
-                    .addComponent(jButton5))
-                .addGap(25, 25, 25)
+                .addComponent(titulo)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1)
                     .addComponent(jButton4))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton6))
+                .addComponent(jButton3)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -198,83 +174,12 @@ public class menuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-	dispose();
+	
 	nodoArbolAvl[] cat = Global.Globales.arbolCategorias.listaCategorias();
 	reportes = new Reportes(cat);
 
 	reportes.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-	JFileChooser selector = new JFileChooser();
-	selector.setDialogTitle("Datos de libros");
-	selector.setMultiSelectionEnabled(false);
-
-	FileNameExtensionFilter filtro = new FileNameExtensionFilter("json", "json");
-	selector.setFileFilter(filtro);
-
-	int abc = selector.showOpenDialog(this);
-	File ti = selector.getSelectedFile();
-
-	if (abc == JFileChooser.APPROVE_OPTION) {
-	    try {
-
-	    } catch (Exception ex) {
-		System.out.println(ex.getMessage());
-	    }
-	}
-
-	JSONParser parser = new JSONParser();
-
-	try {
-	    Object objeto = parser.parse(new InputStreamReader(new FileInputStream(ti), "UTF-8"));
-	    JSONObject objetoJson = (JSONObject) objeto;
-	    JSONArray arrayJson = (JSONArray) objetoJson.get("Libros");
-
-	    for (int i = 0; i < arrayJson.size(); i++) {
-		JSONObject temp = (JSONObject) arrayJson.get(i);
-		libro nuevolibro = new libro();
-		nuevolibro.setIsbn(Integer.parseInt(temp.get("ISBN").toString()));
-		nuevolibro.setAno(Integer.parseInt(temp.get("Año").toString()));
-		nuevolibro.setIdioma(temp.get("Idioma").toString());
-		nuevolibro.setTitulo(temp.get("Titulo").toString());
-		nuevolibro.setEditorial(temp.get("Editorial").toString());
-		nuevolibro.setAutor(temp.get("Autor").toString());
-		nuevolibro.setEdicion(Integer.parseInt(temp.get("Edicion").toString()));
-		nuevolibro.setCarnetUsuarioAdd(Global.Globales.usuarioActivo.getContenido().getCarnet());
-		System.out.println(Global.Globales.usuarioActivo.getContenido().getCarnet());
-		String categoria = temp.get("Categoria").toString();
-		nuevolibro.setCategoria(categoria);
-
-		nodoArbolAvl nodo = Global.Globales.arbolCategorias.buscar(categoria);
-
-		if (nodo != null) {// categoria existe
-		    nodo.librosCategoria.insertar(nuevolibro);
-		    nodo.cantidad++;
-		    nodo.librosCategoria.cantidad++;
-
-		} else {
-		    Global.Globales.arbolCategorias.raiz = Global.Globales.arbolCategorias.insertar(Global.Globales.arbolCategorias.raiz, categoria,
-			    Global.Globales.usuarioActivo.getContenido().getCarnet());
-		    nodoArbolAvl nodoNew = Global.Globales.arbolCategorias.buscar(categoria);
-		    nodoNew.librosCategoria.insertar(nuevolibro);
-		    nodoNew.cantidad++;
-		    nodoNew.librosCategoria.cantidad++;
-
-		}
-
-	    }
-
-
-	    /*  for (int i = 0; i < cat.length; i++) {
-                System.out.println(cat[i].categoria);
-            }*/
-	} catch (org.json.simple.parser.ParseException e) {
-
-	} catch (IOException e) {
-
-	}
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -282,12 +187,9 @@ public class menuPrincipal extends javax.swing.JFrame {
 	biblioteca.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-	nuevoLibro1 = new nuevoLibro();
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-	misBooks = new misLibros();
+	misLibros misBooks = new misLibros();
+	misBooks.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
@@ -330,8 +232,6 @@ public class menuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

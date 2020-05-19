@@ -134,7 +134,6 @@ public class arbolAvl {
 	return temporal;
     }
 
-
     public void bsq(nodoArbolAvl nodo, String categoria) {
 	if (nodo != null) {
 
@@ -147,13 +146,15 @@ public class arbolAvl {
 	}
 
     }
-        nodoArbolB nuevaTemp;
-    public nodoArbolB search(int isbn){
+    nodoArbolB nuevaTemp;
+
+    public nodoArbolB search(int isbn) {
 	nuevaTemp = null;
 	src(raiz, isbn);
 	return nuevaTemp;
     }
-    void src(nodoArbolAvl nodo, int isbn){
+
+    void src(nodoArbolAvl nodo, int isbn) {
 	if (nodo != null) {
 	    nodoArbolB t = nodo.librosCategoria.buscar(isbn);
 
@@ -453,7 +454,7 @@ public class arbolAvl {
     public nodoArbolAvl[] listaCategorias() {
 	categorias = null;
 	if (raiz != null) {
-
+	    cantidad = 0;
 	    recCantidad(raiz);
 
 	    categorias = new nodoArbolAvl[cantidad];
@@ -476,6 +477,7 @@ public class arbolAvl {
     void recLlenar(nodoArbolAvl nodo) {
 	if (nodo != null) {
 	    categorias[cantidad] = nodo;
+
 	    cantidad++;
 	    recLlenar(nodo.izquierda);
 	    recLlenar(nodo.derecha);

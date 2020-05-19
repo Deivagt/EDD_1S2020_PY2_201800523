@@ -20,21 +20,27 @@ import javax.swing.event.ListSelectionListener;
 public class Biblioteca extends javax.swing.JFrame implements ListSelectionListener {
 
     nodoArbolAvl[] cat;
-    DefaultListModel<String> dm = new DefaultListModel<String>();
     nodoArbolAvl nov;
+    DefaultListModel<String> dm = new DefaultListModel<String>();
 
     /**
      * Creates new form Biblioteca
      */
     public Biblioteca() {
 	initComponents();
-	cat = Global.Globales.arbolCategorias.listaCategorias();
+
 	setLocationRelativeTo(null);
 	jList1.addListSelectionListener(this);
-	this.cat = cat;
-	for (int i = 0; i < cat.length; i++) {
-	    comboBox.addItem(cat[i]);
+	cat = Global.Globales.arbolCategorias.listaCategorias();
+	if (cat != null) {
+	    for (int i = 0; i < cat.length; i++) {
+		
+		    comboBox.addItem(cat[i]);
+		
+
+	    }
 	}
+
     }
 
     /**
@@ -279,7 +285,7 @@ public class Biblioteca extends javax.swing.JFrame implements ListSelectionListe
 	    categoria.setText(temp.libros[i].getCategoria());
 	    idioma.setText(temp.libros[i].getIdioma());
 	    dueno.setText(Integer.toString(temp.libros[i].getCarnetUsuarioAdd()));
-	}else{
+	} else {
 	    System.out.println("NO");
 	}
     }//GEN-LAST:event_jButton1ActionPerformed
