@@ -22,9 +22,10 @@ import org.json.simple.parser.JSONParser;
 public class menuPrincipal extends javax.swing.JFrame {
 
     misDatos datos = new misDatos();
-    Reportes reportes;
-    Biblioteca biblioteca;
-    nuevoLibro nuevoLibro1;
+    misLibros misBooks = new misLibros();
+    Reportes reportes = new Reportes();
+    Biblioteca biblioteca = new Biblioteca();
+
 
     nodoArbolAvl[] cat;
 
@@ -165,7 +166,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-	dispose();
+
 	if (datos != null) {
 	    datos.dispose();
 	    datos = new misDatos();
@@ -174,21 +175,29 @@ public class menuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-	
-	nodoArbolAvl[] cat = Global.Globales.arbolCategorias.listaCategorias();
-	reportes = new Reportes(cat);
-
+	if (reportes != null) {
+	    reportes.dispose();
+	    reportes = new Reportes();
+	}
 	reportes.setVisible(true);
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-	biblioteca = new Biblioteca();
+	if (biblioteca != null) {
+	    biblioteca.dispose();
+	    biblioteca = new Biblioteca();
+	}
 	biblioteca.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-	misLibros misBooks = new misLibros();
+	if (misBooks != null) {
+	    misBooks.dispose();
+	    misBooks = new misLibros();
+	}
 	misBooks.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 

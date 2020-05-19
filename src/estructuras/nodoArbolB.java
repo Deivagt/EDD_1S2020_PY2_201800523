@@ -165,7 +165,7 @@ public class nodoArbolB {
 	}
     }
 
-    void borrar(int isbn) {
+  public  void borrar(int isbn) {
 	int id = obtenerId(isbn);
 
 	if (id < cantidad && libros[id].isbn == isbn) {

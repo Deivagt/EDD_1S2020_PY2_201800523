@@ -166,6 +166,27 @@ public class arbolAvl {
 
 	}
     }
+    arbolB nuevaTemp1;
+
+    public arbolB search1(int isbn) {
+	nuevaTemp1 = null;
+	
+	src1(raiz, isbn);
+	return nuevaTemp1;
+    }
+
+    void src1(nodoArbolAvl nodo, int isbn) {
+	if (nodo != null) {
+	    nodoArbolB t = nodo.librosCategoria.buscar(isbn);
+
+	    if (t != null) {
+		nuevaTemp1 = nodo.librosCategoria;
+	    }
+	    src1(nodo.izquierda, isbn);
+	    src1(nodo.derecha, isbn);
+
+	}
+    }
 
     public boolean verificarBorrar(nodoArbolAvl nodo, String categoria, int carnet) {
 	control = false;

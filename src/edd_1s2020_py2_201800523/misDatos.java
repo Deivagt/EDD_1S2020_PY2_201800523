@@ -21,12 +21,12 @@ public class misDatos extends javax.swing.JFrame {
      */
     public misDatos() {
 	initComponents();
+	setLocationRelativeTo(null);
 	this.nombre.setText(nodo.getContenido().getNombre());
 	this.apellido.setText(nodo.getContenido().getApellido());
 	this.carrera.setText(nodo.getContenido().getCarrera());
 	this.carnet.setText(Integer.toString(nodo.getContenido().getCarnet()));
 
-	setLocationRelativeTo(null);
     }
 
     /**
@@ -258,12 +258,8 @@ public class misDatos extends javax.swing.JFrame {
 	    Global.Globales.usuarioActivo.getContenido().setPass(contra1.getText());
 	    JOptionPane.showMessageDialog(null, "Hecho");
 
-	    menuPrincipal menu = new menuPrincipal();
 	    dispose();
-	    if (menu != null) {
-		menu.dispose();
-	    }
-	    menu.setVisible(true);
+
 	}
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -333,11 +329,6 @@ public class misDatos extends javax.swing.JFrame {
 	//</editor-fold>
 
 	/* Create and display the form */
-	java.awt.EventQueue.invokeLater(new Runnable() {
-	    public void run() {
-		new misDatos().setVisible(true);
-	    }
-	});
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

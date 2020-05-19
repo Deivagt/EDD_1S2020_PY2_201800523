@@ -10,6 +10,7 @@ import estructuras.nodoArbolAvl;
 import estructuras.nodoArbolB;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -21,6 +22,7 @@ public class Biblioteca extends javax.swing.JFrame implements ListSelectionListe
 
     nodoArbolAvl[] cat;
     nodoArbolAvl nov;
+    libro[] books;
     DefaultListModel<String> dm = new DefaultListModel<String>();
 
     /**
@@ -34,9 +36,8 @@ public class Biblioteca extends javax.swing.JFrame implements ListSelectionListe
 	cat = Global.Globales.arbolCategorias.listaCategorias();
 	if (cat != null) {
 	    for (int i = 0; i < cat.length; i++) {
-		
-		    comboBox.addItem(cat[i]);
-		
+
+		comboBox.addItem(cat[i]);
 
 	    }
 	}
@@ -248,7 +249,7 @@ public class Biblioteca extends javax.swing.JFrame implements ListSelectionListe
 
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
 	nov = (nodoArbolAvl) comboBox.getSelectedItem();
-	libro[] books = nov.librosCategoria.listaLibros();
+	books = nov.librosCategoria.listaLibros();
 	titulo.setText("");
 	isbn.setText("");
 	autor.setText("");
@@ -260,7 +261,12 @@ public class Biblioteca extends javax.swing.JFrame implements ListSelectionListe
 	dueno.setText("");
 	dm.clear();
 	for (libro book : books) {
-	    dm.addElement(Integer.toString(book.getIsbn()));
+	    try {
+		dm.addElement(Integer.toString(book.getIsbn()));
+	    } catch (NullPointerException e) {
+		// JOptionPane.showMessageDialog(null, "Algo Salio Mal...");
+	    }
+
 	}
 	jList1.setSelectedIndex(-1);
 	//nov.librosCategoria.atravesar();
@@ -286,7 +292,7 @@ public class Biblioteca extends javax.swing.JFrame implements ListSelectionListe
 	    idioma.setText(temp.libros[i].getIdioma());
 	    dueno.setText(Integer.toString(temp.libros[i].getCarnetUsuarioAdd()));
 	} else {
-	    System.out.println("NO");
+
 	}
     }//GEN-LAST:event_jButton1ActionPerformed
 
